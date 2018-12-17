@@ -1,0 +1,16 @@
+{
+  "name": "circular-json-hydrator",
+  "version": "0.1.0",
+  "description": "module that has utility methods for hydrating/dehydrating circular refereneces within an object.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Trae Hurley",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "chai": "^4.2.0"
+  },
+  "dependencies": {}
+}
