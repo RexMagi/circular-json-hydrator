@@ -4,13 +4,23 @@
   "description": "module that has utility methods for hydrating/dehydrating circular refereneces within an object.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --compilers js:@babel/register"
   },
   "author": "Trae Hurley",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/RexMagi/circular-json-hydrator"
+  },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "chai": "^4.2.0"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-decorators": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   },
   "dependencies": {}
 }
