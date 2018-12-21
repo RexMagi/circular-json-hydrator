@@ -1,30 +1,103 @@
 const hydrator = require('./index.js');
-const assert = require('assert');
-
-
-describe('Decarator', function () {
-    it('should track properties that', function () {
-        class testClass {
-            @hydrator.managedRef
-            testProperty1;
-            @hydrator.managedRef
-            testProperty2;
-            @hydrator.managedRef
-            testProperty3;
-        };
-
-        const testObj = new testClass();
-    });
-});
+const sinon = require('sinon');
+const assert = require('chai').assert;
 
 describe('hydrate', function () {
-    it('should inflate all refereneces by value', function () {
+    it('should inflate sibling objects', function () {
+        const testObject = {
+            prop1: {
+                id: 1
+            },
+            prop2: 1
+        };
+        const expectedObject = {
+            prop1: {
+                id: 1
+            }
+        };
+        expectedObject.prop2 = expectedObject.prop1;
+        const result = hydrator.hydrateObject(testObject, "id");
+
+        assert.deepEqual(expectedObject, result);
+
+    });
+
+    it('should inflate objects nested in objects', function () {
+        const testObject = {
+            prop1: {
+                id: 3
+            },
+            prop2: {
+                id: 4,
+                prop21: 3
+            }
+
+        };
+
+        const expectedObject = {
+            prop1: {
+                id: 3
+            },
+            prop2: {
+                id: 4,
+
+            }
+        };
+        expectedObject.prop2.prop21 = expectedObject.prop1;
+
+        const result = hydrator.hydrateObject(testObject, "id");
+
+        assert.deepEqual(result, expectedObject);
+
+    });
+
+    it('should inflate objects nested in arrays', function () {
+        const testObject = {
+            prop1: {
+                id: 1
+            },
+            prop2: [1, 1, 1]
+        };
+
+        const expectedObject = {
+            prop1: {
+                id: 1
+            }
+        };
+        expectedObject.prop2 = [];
+
+        expectedObject.prop2.push(expectedObject.prop1);
+        expectedObject.prop2.push(expectedObject.prop1);
+        expectedObject.prop2.push(expectedObject.prop1);
+
+        const result = hydrator.hydrateObject(testObject, "id");
+
+        assert.deepEqual(result, expectedObject);
+
+    });
+
+    it('should not change the orginal object', function () {
+        const testObject = {
+            prop1: {
+                id: 1
+            },
+            prop2: 1
+        };
+
+        const expectedObject = {
+            ...testObject
+        };
+
+        const result = hydrator.hydrateObject(testObject, "id");
+
+        assert.deepEqual(testObject, expectedObject);
 
     });
 
     it('should inflate references by decarator', function () {
 
-    })
+    });
+
 
 
 

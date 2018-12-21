@@ -20,7 +20,8 @@
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.2"
   },
   "dependencies": {}
 }
